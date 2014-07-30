@@ -1,0 +1,21 @@
+# Vietnamese translation of Commerce add to cart confirmation (7.x-1.0-rc2)
+# Copyright (c) 2013 by the Vietnamese translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Commerce add to cart confirmation (7.x-1.0-rc2)\n"
+"POT-Creation-Date: 2013-08-02 00:41+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Language-Team: Vietnamese\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Close"
+msgstr "Đóng"
+msgid "Continue shopping"
+msgstr "Tiếp tục mua hàng"
+msgid "Go to checkout"
+msgstr "Thanh toán ngay"
+msgid "Item successfully added to your cart"
+msgstr "Sản phẩm đã được thêm vào giỏ hàng của bạn"

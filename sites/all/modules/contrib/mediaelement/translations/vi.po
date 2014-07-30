@@ -1,0 +1,21 @@
+# Vietnamese translation of MediaElement (7.x-1.2)
+# Copyright (c) 2012 by the Vietnamese translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MediaElement (7.x-1.2)\n"
+"POT-Creation-Date: 2012-12-24 02:19+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Language-Team: Vietnamese\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Download"
+msgstr "Tải về"
+msgid "Width"
+msgstr "Chiều rộng"
+msgid "Height"
+msgstr "Chiều cao"
+msgid "Download Link"
+msgstr "Liên kết tải xuống"

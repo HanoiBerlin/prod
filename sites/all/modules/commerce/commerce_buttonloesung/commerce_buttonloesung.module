@@ -1,0 +1,55 @@
+<?php
+/**
+ * @file commerce_buttonloesung.module
+ * TODO: Enter file description here.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function commerce_buttonloesung_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#commerce_buttonloesung':
+      return t("TODO: Create admin help text.");
+    // OPTIONAL: Add additional cases for other paths that should display help text.
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function commerce_buttonloesung_menu() {
+  $items = array();
+  $items['admin/commerce/config/checkout/buttonloesung'] = array(
+    'title' => 'Button-Loesung',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('commerce_buttonloesung_admin'),
+    'access arguments' => array('administer checkout'),
+    'type' => MENU_LOCAL_TASK
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_admin().
+ */
+function commerce_buttonloesung_admin() {
+  $form = array();
+
+  $form['buybutton_caption'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Caption of the buy button'),
+    '#default_value' => variable_get('buybutton_caption', t('Buy')),
+    '#required' => TRUE
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_commerce_checkout_page_info_alter().
+ */
+function commerce_buttonloesung_commerce_checkout_page_info_alter(&$checkout_pages) {
+  $checkout_pages['review']['submit_value'] = variable_get('buybutton_caption', t('Buy'));
+}
+

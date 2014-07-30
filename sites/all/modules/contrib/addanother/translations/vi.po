@@ -1,0 +1,19 @@
+# Vietnamese translation of Add another (7.x-2.2)
+# Copyright (c) 2014 by the Vietnamese translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Add another (7.x-2.2)\n"
+"POT-Creation-Date: 2014-05-10 08:24+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Language-Team: Vietnamese\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "User interface"
+msgstr "Giao diện người dùng"
+msgid "Save and add another"
+msgstr "Lưu và tạo mới"
+msgid "@type %title has been created."
+msgstr "@type %title đã được tạo."
