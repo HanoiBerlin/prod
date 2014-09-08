@@ -38,6 +38,26 @@ function picture_help($path, $arg) {
 }
 
 /**
+ * Implements hook_requirements().
+ */
+function picture_requirements($phase) {
+  $requirements = array();
+  if (module_exists('colorbox')) {
+    $info = system_get_info('module', 'colorbox');
+    $requirements['picture_colorbox'] = array(
+      'title' => t('Picture: Colorbox module version.'),
+      'value' => $info['version'],
+      'severity' => REQUIREMENT_OK,
+    );
+    if (version_compare($info['version'], '7.x-2.5') < 0) {
+      $requirements['picture_colorbox']['description'] = t('The Colorbox module must be version 7.x-2.5 or higher in order to work with the Picture module.');
+      $requirements['picture_colorbox']['severity'] = REQUIREMENT_ERROR;
+    }
+  }
+  return $requirements;
+}
+
+/**
  * Implements hook_permission().
  */
 function picture_permission() {
@@ -1385,7 +1405,7 @@ function picture_get_mapping_breakpoints(PictureMapping $picture_mapping, &$fall
         $multipliers = array_intersect_key($multipliers, $breakpoint->multipliers);
         foreach ($multipliers as $multiplier => $mapping_definition) {
           // Make sure the multiplier still exists.
-          if (!$picture_mapping::isEmptyMappingDefinition($mapping_definition)) {
+          if (!PictureMapping::isEmptyMappingDefinition($mapping_definition)) {
             if ($mapping_definition['mapping_type'] == 'image_style') {
               $image_styles[] = $mapping_definition['image_style'];
             }
