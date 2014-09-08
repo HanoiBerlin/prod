@@ -10,8 +10,8 @@
 function base_imprint_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-impressum-body'
-  $field_instances['node-impressum-body'] = array(
+  // Exported field_instance: 'node-impressum-field_additional_information'
+  $field_instances['node-impressum-field_additional_information'] = array(
     'bundle' => 'impressum',
     'default_value' => NULL,
     'deleted' => 0,
@@ -24,33 +24,30 @@ function base_imprint_field_default_field_instances() {
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'body',
+    'field_name' => 'field_additional_information',
     'label' => 'Additional Information',
     'required' => 0,
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'commerce_order_message' => 'commerce_order_message',
+          'commerce_order_message' => 0,
           'plain_text' => 'plain_text',
         ),
-        'allowed_formats_toggle' => 0,
+        'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
@@ -63,7 +60,11 @@ function base_imprint_field_default_field_instances() {
           ),
         ),
       ),
-      'display_summary' => 1,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
@@ -71,11 +72,10 @@ function base_imprint_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
-        'summary_rows' => 5,
+        'rows' => 5,
       ),
-      'type' => 'text_textarea_with_summary',
-      'weight' => 31,
+      'type' => 'text_textarea',
+      'weight' => 39,
     ),
   );
 
