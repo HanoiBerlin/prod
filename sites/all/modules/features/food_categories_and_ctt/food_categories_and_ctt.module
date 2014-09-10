@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Food Categories and CTT feature.
+ */
+
+include_once 'food_categories_and_ctt.features.inc';
