@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Resto Content Type Restaurant feature.
+ */
+
+include_once 'resto_content_type_restaurant.features.inc';
