@@ -85,7 +85,7 @@ class CommerceOrderEntityController extends DrupalCommerceEntityController {
         if ($order->uid === '') {
           unset($order->uid);
         }
-        if (property_exists($order, 'hostname') && $order->hostname === '') {
+        if ($order->hostname === '') {
           unset($order->hostname);
         }
       }
