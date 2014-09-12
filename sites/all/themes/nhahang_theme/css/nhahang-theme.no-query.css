@@ -13,3 +13,18 @@ img, video {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/base\/_media\.scss}line{font-family:\000031}}
 img, media {
   max-width: 100%; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_navigation\.scss}line{font-family:\000032}}
+.block--system-main-menu .menu {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_navigation\.scss}line{font-family:\000036}}
+  .block--system-main-menu .menu li {
+    list-style: none;
+    display: inline-block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_navigation\.scss}line{font-family:\000039}}
+    .block--system-main-menu .menu li a {
+      text-decoration: none;
+      color: #000;
+      padding: .5em 1em .5em 0; }

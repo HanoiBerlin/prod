@@ -1,0 +1,17 @@
+.block--system-main-menu {
+  .menu {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
+        list-style: none;
+        display: inline-block;
+        a {
+          text-decoration: none;
+          color: $black;
+          padding: .5em 1em .5em 0;
+        }
+      }
+  }
+
+}
