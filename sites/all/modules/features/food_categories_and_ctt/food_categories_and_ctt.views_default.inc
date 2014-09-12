@@ -53,6 +53,7 @@ function food_categories_and_ctt_views_default_views() {
   $handler->display->display_options['fields']['field_food_category']['field'] = 'field_food_category';
   $handler->display->display_options['fields']['field_food_category']['label'] = '';
   $handler->display->display_options['fields']['field_food_category']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_food_category']['element_type'] = 'strong';
   $handler->display->display_options['fields']['field_food_category']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_food_category']['type'] = 'taxonomy_term_reference_plain';
   /* Field: Content: Title */
@@ -62,6 +63,7 @@ function food_categories_and_ctt_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_type'] = 'strong';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Commerce Product: Price */
