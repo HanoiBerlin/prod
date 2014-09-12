@@ -71,7 +71,7 @@ function resto_content_type_restaurant_views_default_views() {
     'separator_hours_hours' => '-',
     'separator_more_hours' => ', ',
     'current_status' => array(
-      'position' => 'hide',
+      'position' => 'before',
       'open_text' => 'Currently open!',
       'closed_text' => 'Currently closed',
     ),
