@@ -21,6 +21,15 @@ img, media {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_footer\.scss}line{font-family:\000036}}
 .address-footer .group-right {
   width: 70%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_footer\.scss}line{font-family:\000039}}
+.address-footer .oh-current-closed {
+  display: block;
+  font-size: 2em;
+  color: red;
+  margin: .5em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_footer\.scss}line{font-family:\0000315}}
+.address-footer .oh-current-open {
+  color: green; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_navigation\.scss}line{font-family:\000032}}
 .block--system-main-menu .menu {

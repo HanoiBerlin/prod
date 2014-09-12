@@ -6,4 +6,13 @@
   .group-right {
     width: 70%;
   }
+  .oh-current-closed {
+    display: block;
+    font-size: 2em;
+    color: red;
+    margin: .5em;
+  }
+  .oh-current-open {
+    color: green;
+  }
 }
