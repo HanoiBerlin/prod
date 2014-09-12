@@ -323,9 +323,74 @@ function food_categories_and_ctt_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-food_categories-field_food_category_photo'
+  $field_instances['taxonomy_term-food_categories-field_food_category_photo'] = array(
+    'bundle' => 'food_categories',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'add_to_cart_form' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_food_category_photo',
+    'label' => 'Food Category Photo',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => 'food-category-photo',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '3 MB',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 'media_default--media_browser_1',
+          'media_default--media_browser_my_files' => 'media_default--media_browser_my_files',
+          'media_internet' => 'media_internet',
+          'upload' => 'upload',
+        ),
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'media_generic',
+      'weight' => 1,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Food Category');
+  t('Food Category Photo');
   t('Food Description');
   t('Food Photo');
   t('Food Product');
