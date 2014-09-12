@@ -30,6 +30,12 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'footer' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -77,6 +83,61 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 5,
+      ),
+      'footer' => array(
+        'label' => 'hidden',
+        'module' => 'leaflet',
+        'settings' => array(
+          'height' => 400,
+          'icon' => array(
+            'html' => '',
+            'htmlClass' => '',
+            'iconAnchor' => array(
+              'x' => '',
+              'y' => '',
+            ),
+            'iconImageStyle' => '',
+            'iconSize' => array(
+              'x' => '',
+              'y' => '',
+            ),
+            'iconType' => 'marker',
+            'iconUrl' => '',
+            'popupAnchor' => array(
+              'x' => '',
+              'y' => '',
+            ),
+            'shadowAnchor' => array(
+              'x' => '',
+              'y' => '',
+            ),
+            'shadowUrl' => '',
+          ),
+          'leaflet_map' => 'OSM Mapnik',
+          'popup' => array(
+            'show' => 0,
+            'text' => '',
+          ),
+          'vector_display' => array(
+            'clickable' => 0,
+            'color' => '',
+            'dashArray' => '',
+            'fill' => 0,
+            'fillColor' => '',
+            'fillOpacity' => '',
+            'opacity' => '',
+            'stroke' => 0,
+            'stroke_override' => 0,
+            'weight' => '',
+          ),
+          'zoom' => array(
+            'initialZoom' => -1,
+            'maxZoom' => -1,
+            'minZoom' => 1,
+          ),
+        ),
+        'type' => 'geofield_leaflet',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -133,18 +194,24 @@ function resto_content_type_restaurant_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+      'footer' => array(
+        'label' => 'inline',
         'module' => 'office_hours',
         'settings' => array(
           'closedformat' => 'Closed',
-          'compress' => FALSE,
+          'compress' => 0,
           'current_status' => array(
             'closed_text' => 'Currently closed',
             'open_text' => 'Currently open!',
-            'position' => 'hide',
+            'position' => 'before',
           ),
           'date_first_day' => 0,
           'daysformat' => 'long',
-          'grouped' => FALSE,
+          'grouped' => 1,
           'hoursformat' => 0,
           'separator_day_hours' => ': ',
           'separator_days' => '<br />',
@@ -155,7 +222,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
           'timezone_field' => '',
         ),
         'type' => 'office_hours',
-        'weight' => 6,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -214,6 +281,18 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'type' => 'addressfield_default',
         'weight' => 2,
       ),
+      'footer' => array(
+        'label' => 'hidden',
+        'module' => 'addressfield',
+        'settings' => array(
+          'format_handlers' => array(
+            0 => 'address',
+          ),
+          'use_widget_handlers' => 1,
+        ),
+        'type' => 'addressfield_default',
+        'weight' => 1,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -267,6 +346,13 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 1,
+      ),
+      'footer' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -338,6 +424,12 @@ function resto_content_type_restaurant_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 3,
+      ),
+      'footer' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',

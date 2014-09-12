@@ -24,7 +24,6 @@ function resto_content_type_restaurant_ds_layout_settings_info() {
         1 => 'field_restaurant_contact',
         2 => 'field_restaurant_address',
         3 => 'field_restaurant_images',
-        4 => 'field_restaurant_opening_hours',
       ),
     ),
     'fields' => array(
@@ -32,10 +31,11 @@ function resto_content_type_restaurant_ds_layout_settings_info() {
       'field_restaurant_contact' => 'ds_content',
       'field_restaurant_address' => 'ds_content',
       'field_restaurant_images' => 'ds_content',
-      'field_restaurant_opening_hours' => 'ds_content',
     ),
     'classes' => array(),
-    'wrappers' => array(),
+    'wrappers' => array(
+      'ds_content' => 'div',
+    ),
     'layout_wrapper' => 'div',
     'layout_attributes' => '',
     'layout_attributes_merge' => TRUE,
@@ -43,6 +43,43 @@ function resto_content_type_restaurant_ds_layout_settings_info() {
     'layout_link_custom' => '',
   );
   $export['node|resto_restaurant|default'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|resto_restaurant|footer';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'resto_restaurant';
+  $ds_layout->view_mode = 'footer';
+  $ds_layout->layout = 'ds_2col_fluid';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'left' => array(
+        0 => 'field_restaurant_contact',
+        1 => 'field_restaurant_address',
+        2 => 'field_office_hours',
+      ),
+      'right' => array(
+        3 => 'field_geofield',
+      ),
+    ),
+    'fields' => array(
+      'field_restaurant_contact' => 'left',
+      'field_restaurant_address' => 'left',
+      'field_office_hours' => 'left',
+      'field_geofield' => 'right',
+    ),
+    'classes' => array(),
+    'wrappers' => array(
+      'left' => 'div',
+      'right' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+  );
+  $export['node|resto_restaurant|footer'] = $ds_layout;
 
   return $export;
 }

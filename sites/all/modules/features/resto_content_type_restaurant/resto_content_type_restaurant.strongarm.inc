@@ -37,6 +37,9 @@ function resto_content_type_restaurant_strongarm() {
       'revision' => array(
         'custom_settings' => FALSE,
       ),
+      'footer' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
