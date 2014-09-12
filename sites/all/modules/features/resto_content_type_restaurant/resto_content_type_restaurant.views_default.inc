@@ -51,6 +51,32 @@ function resto_content_type_restaurant_views_default_views() {
       'address' => 'address',
     ),
   );
+  /* Field: Content: Office Hours */
+  $handler->display->display_options['fields']['field_office_hours']['id'] = 'field_office_hours';
+  $handler->display->display_options['fields']['field_office_hours']['table'] = 'field_data_field_office_hours';
+  $handler->display->display_options['fields']['field_office_hours']['field'] = 'field_office_hours';
+  $handler->display->display_options['fields']['field_office_hours']['label'] = 'Opening Hours';
+  $handler->display->display_options['fields']['field_office_hours']['click_sort_column'] = 'day';
+  $handler->display->display_options['fields']['field_office_hours']['settings'] = array(
+    'showclosed' => 'all',
+    'date_first_day' => '0',
+    'daysformat' => 'long',
+    'hoursformat' => '0',
+    'compress' => 0,
+    'grouped' => 1,
+    'closedformat' => 'Closed',
+    'separator_days' => '<br />',
+    'separator_grouped_days' => ' - ',
+    'separator_day_hours' => ': ',
+    'separator_hours_hours' => '-',
+    'separator_more_hours' => ', ',
+    'current_status' => array(
+      'position' => 'hide',
+      'open_text' => 'Currently open!',
+      'closed_text' => 'Currently closed',
+    ),
+  );
+  $handler->display->display_options['fields']['field_office_hours']['delta_offset'] = '0';
   /* Field: Content: Geofield */
   $handler->display->display_options['fields']['field_geofield']['id'] = 'field_geofield';
   $handler->display->display_options['fields']['field_geofield']['table'] = 'field_data_field_geofield';
@@ -108,10 +134,6 @@ function resto_content_type_restaurant_views_default_views() {
       'clickable' => 0,
     ),
   );
-  /* Field: Content: Opening hours */
-  $handler->display->display_options['fields']['field_restaurant_opening_hours']['id'] = 'field_restaurant_opening_hours';
-  $handler->display->display_options['fields']['field_restaurant_opening_hours']['table'] = 'field_data_field_restaurant_opening_hours';
-  $handler->display->display_options['fields']['field_restaurant_opening_hours']['field'] = 'field_restaurant_opening_hours';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -142,7 +164,7 @@ function resto_content_type_restaurant_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Opening hours'),
+    t('Opening Hours'),
     t('Block'),
   );
   $export['address_footer_block'] = $view;

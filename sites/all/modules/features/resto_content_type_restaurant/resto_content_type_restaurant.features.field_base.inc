@@ -90,6 +90,29 @@ function resto_content_type_restaurant_field_default_field_bases() {
     'type' => 'geofield',
   );
 
+  // Exported field_base: 'field_office_hours'
+  $field_bases['field_office_hours'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_office_hours',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'office_hours',
+    'settings' => array(
+      'cardinality' => 2,
+      'granularity' => 1,
+      'hoursformat' => 0,
+      'limitend' => '',
+      'limitstart' => '',
+      'valhrs' => 1,
+    ),
+    'translatable' => 0,
+    'type' => 'office_hours',
+  );
+
   // Exported field_base: 'field_restaurant_address'
   $field_bases['field_restaurant_address'] = array(
     'active' => 1,
@@ -161,33 +184,6 @@ function resto_content_type_restaurant_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'image',
-  );
-
-  // Exported field_base: 'field_restaurant_opening_hours'
-  $field_bases['field_restaurant_opening_hours'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_restaurant_opening_hours',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'text_long',
   );
 
   return $field_bases;

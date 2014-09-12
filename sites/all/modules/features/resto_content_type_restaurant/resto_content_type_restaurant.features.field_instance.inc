@@ -56,7 +56,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 31,
+      'weight' => 4,
     ),
   );
 
@@ -114,7 +114,69 @@ function resto_content_type_restaurant_field_default_field_instances() {
         ),
       ),
       'type' => 'geocoder',
-      'weight' => 36,
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance: 'node-resto_restaurant-field_office_hours'
+  $field_instances['node-resto_restaurant-field_office_hours'] = array(
+    'bundle' => 'resto_restaurant',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'checkout_pane' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'office_hours',
+        'settings' => array(
+          'closedformat' => 'Closed',
+          'compress' => FALSE,
+          'current_status' => array(
+            'closed_text' => 'Currently closed',
+            'open_text' => 'Currently open!',
+            'position' => 'hide',
+          ),
+          'date_first_day' => 0,
+          'daysformat' => 'long',
+          'grouped' => FALSE,
+          'hoursformat' => 0,
+          'separator_day_hours' => ': ',
+          'separator_days' => '<br />',
+          'separator_grouped_days' => ' - ',
+          'separator_hours_hours' => '-',
+          'separator_more_hours' => ', ',
+          'showclosed' => 'all',
+          'timezone_field' => '',
+        ),
+        'type' => 'office_hours',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_office_hours',
+    'label' => 'Office Hours',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'office_hours',
+      'settings' => array(),
+      'type' => 'office_hours',
+      'weight' => 1,
     ),
   );
 
@@ -182,7 +244,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         ),
       ),
       'type' => 'addressfield_standard',
-      'weight' => 33,
+      'weight' => 6,
     ),
   );
 
@@ -251,7 +313,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 32,
+      'weight' => 5,
     ),
   );
 
@@ -322,76 +384,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'media_generic',
-      'weight' => 34,
-    ),
-  );
-
-  // Exported field_instance: 'node-resto_restaurant-field_restaurant_opening_hours'
-  $field_instances['node-resto_restaurant-field_restaurant_opening_hours'] = array(
-    'bundle' => 'resto_restaurant',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'checkout_pane' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_restaurant_opening_hours',
-    'label' => 'Opening hours',
-    'required' => 0,
-    'settings' => array(
-      'better_formats' => array(
-        'allowed_formats' => array(
-          'commerce_order_message' => 'commerce_order_message',
-          'plain_text' => 'plain_text',
-        ),
-        'allowed_formats_toggle' => 0,
-        'default_order_toggle' => 0,
-        'default_order_wrapper' => array(
-          'formats' => array(
-            'commerce_order_message' => array(
-              'weight' => 0,
-            ),
-            'plain_text' => array(
-              'weight' => 10,
-            ),
-          ),
-        ),
-      ),
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 35,
+      'weight' => 7,
     ),
   );
 
@@ -402,7 +395,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
   t('Contact');
   t('Geofield');
   t('Images');
-  t('Opening hours');
+  t('Office Hours');
 
   return $field_instances;
 }
