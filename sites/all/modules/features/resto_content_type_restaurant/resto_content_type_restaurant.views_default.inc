@@ -55,9 +55,58 @@ function resto_content_type_restaurant_views_default_views() {
   $handler->display->display_options['fields']['field_geofield']['id'] = 'field_geofield';
   $handler->display->display_options['fields']['field_geofield']['table'] = 'field_data_field_geofield';
   $handler->display->display_options['fields']['field_geofield']['field'] = 'field_geofield';
+  $handler->display->display_options['fields']['field_geofield']['label'] = '';
+  $handler->display->display_options['fields']['field_geofield']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_geofield']['click_sort_column'] = 'geom';
+  $handler->display->display_options['fields']['field_geofield']['type'] = 'geofield_leaflet';
   $handler->display->display_options['fields']['field_geofield']['settings'] = array(
-    'data' => 'full',
+    'leaflet_map' => 'OSM Mapnik',
+    'height' => '400',
+    'popup' => array(
+      'show' => 0,
+      'text' => '',
+    ),
+    'zoom' => array(
+      'initialZoom' => '-1',
+      'minZoom' => '1',
+      'maxZoom' => '-1',
+    ),
+    'icon' => array(
+      'iconType' => 'marker',
+      'iconUrl' => '',
+      'shadowUrl' => '',
+      'html' => '',
+      'iconImageStyle' => '',
+      'htmlClass' => '',
+      'iconSize' => array(
+        'x' => '',
+        'y' => '',
+      ),
+      'iconAnchor' => array(
+        'x' => '',
+        'y' => '',
+      ),
+      'shadowAnchor' => array(
+        'x' => '',
+        'y' => '',
+      ),
+      'popupAnchor' => array(
+        'x' => '',
+        'y' => '',
+      ),
+    ),
+    'vector_display' => array(
+      'stroke_override' => 0,
+      'stroke' => 0,
+      'color' => '',
+      'weight' => '',
+      'opacity' => '',
+      'dashArray' => '',
+      'fill' => 0,
+      'fillColor' => '',
+      'fillOpacity' => '',
+      'clickable' => 0,
+    ),
   );
   /* Field: Content: Opening hours */
   $handler->display->display_options['fields']['field_restaurant_opening_hours']['id'] = 'field_restaurant_opening_hours';
@@ -93,7 +142,6 @@ function resto_content_type_restaurant_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Geofield'),
     t('Opening hours'),
     t('Block'),
   );
