@@ -14,6 +14,14 @@ img, video {
 img, media {
   max-width: 100%; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_footer\.scss}line{font-family:\000032}}
+.address_footer .group-left {
+  width: 30%;
+  min-width: 200px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_footer\.scss}line{font-family:\000036}}
+.address_footer .group-right {
+  width: 70%; }
+
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_navigation\.scss}line{font-family:\000032}}
 .block--system-main-menu .menu {
   margin: 0;
