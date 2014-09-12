@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implements hook_load_menu().
+ * Implements hook_menu().
  */
 function commerce_billy_mail_menu() {
   $items['admin/commerce/config/billy-invoice/billy-mail'] = array(
@@ -10,11 +10,12 @@ function commerce_billy_mail_menu() {
     'access arguments' => array('administer site configuration'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('commerce_billy_mail_settings_form'),
+    'type' => MENU_LOCAL_TASK,
     'file' => 'commerce_billy_mail.admin.inc');
   $items['admin/commerce/orders/%commerce_order/resend-pdf-invoice'] = array(
     'title' => 'Resend invoice mail',
-    'page callback' => 'commerce_billy_mail_resend_page',
-    'page arguments' => array(3),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('commerce_billy_mail_resend_form', 3),
     'access callback' => 'commerce_billy_mail_resend_access',
     'access arguments' => array(3),
     'type' => MENU_LOCAL_ACTION,
@@ -29,6 +30,11 @@ function commerce_billy_mail_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_permission().
+ *
+ * @return array
+ */
 function commerce_billy_mail_permission() {
   return array(
     'commerce_billy_mail_resend_invoice_mail' => array(
@@ -49,7 +55,14 @@ function commerce_billy_mail_resend_access($order) {
   return commerce_billy_pdf_view_access($order) && user_access('commerce_billy_mail_resend_invoice_mail');
 }
 
-function _commerce_billy_mail_mimemail_send_order_invoice($order) {
+/**
+ * Helper function to send the order mail.
+ *
+ * @global stdClass $language
+ * @param stdClass $order
+ * @return boolean
+ */
+function _commerce_billy_mail_send_order_invoice($order) {
   global $language;
   if (empty($order) || !is_object($order)) {
     drupal_set_message('Given order was empty or no object. No invoice was sent!', 'error');
@@ -111,7 +124,7 @@ function _commerce_billy_mail_mimemail_send_order_invoice($order) {
     unset($params['headers']['Bcc']);
   }
 
-  $mailkey = 'commerce_billy_mimemail_send_order_invoice';
+  $mailkey = 'commerce_billy_send_order_invoice';
   $send = true;
   // Send!
   $message = drupal_mail('commerce_billy_mail', $mailkey, $order->mail, $order_account_language, $params, $from, $send);
@@ -123,6 +136,13 @@ function _commerce_billy_mail_mimemail_send_order_invoice($order) {
   return TRUE;
 }
 
+/**
+ * Implements hook_mail().
+ *
+ * @param String $key
+ * @param array $message
+ * @param array $params
+ */
 function commerce_billy_mail_mail($key, &$message, $params) {
   switch ($key) {
     default:
@@ -137,6 +157,9 @@ function commerce_billy_mail_mail($key, &$message, $params) {
       }
       if (isset($params['plain'])) {
         $message['plain'] = $params['plain'];
+      }
+      if (isset($params['attachments'])) {
+        $message['attachments'][] = $params['attachments'];
       }
       break;
   }
@@ -154,6 +177,12 @@ function commerce_billy_mail_custom_theme() {
   return variable_get('theme_default');
 }
 
+/**
+ * Returns the mail attachment(s).
+ *
+ * @param stdClass $order
+ * @return array
+ */
 function _commerce_billy_mail_get_attachments($order) {
   $attachments = array();
 
@@ -169,6 +198,13 @@ function _commerce_billy_mail_get_attachments($order) {
   return $attachments;
 }
 
+/**
+ * Helper function to prepare the order mail.
+ * Returns its components as array.
+ *
+ * @param stdClass $order
+ * @return array
+ */
 function commerce_billy_mail_pdf_prepare($order) {
   // Currently a copy of the first part of
   // See: https://drupal.org/node/2099283
@@ -180,7 +216,8 @@ function commerce_billy_mail_pdf_prepare($order) {
   }
   $html = commerce_billy_pdf_html($order);
 
-  $filename = preg_replace('/[^a-z0-9]/', '_', drupal_strtolower('invoice_' . $order->order_number)) . '__' . time() . '.' . mt_rand(1, 999999999) . '.pdf';
+  // TODO: Better use $filename = commerce_billy_pdf_gen_filename($order); when issue #2093643 is resolved in commerce_billy.
+  $filename = preg_replace('/[^a-z0-9]/', '_', drupal_strtolower('invoice_' . $order->order_number)) . '.pdf';
   if (module_exists('transliteration')) {
     $filename = transliteration_clean_filename($filename);
   }
@@ -205,17 +242,36 @@ function commerce_billy_mail_pdf_create($html, $filename) {
 }
 
 /**
- * Page callback for pdf invoice mail resend.
+ * Form callback for pdf invoice mail resend.
+ *
+ * We are using a form to prevent CSRF for the resend link.
  *
  * @param StdObject $order Commerce Order object
  */
-function commerce_billy_mail_resend_page($order) {
-  $success = _commerce_billy_mail_mimemail_send_order_invoice($order);
+function commerce_billy_mail_resend_form($form, &$form_state, $order) {
+  $form = array();
+  $form['order'] = array(
+    '#type' => 'value',
+    '#value' => $order,
+  );
+  $form['send'] = array(
+    '#type' => 'submit',
+    '#value' => t('Resend invoice now'),
+  );
+  return $form;
+}
+
+/**
+ * Form submit handler for sending the invoice.
+ */
+function commerce_billy_mail_resend_form_submit($form, &$form_state) {
+  $order = $form_state['values']['order'];
+  $success = _commerce_billy_mail_send_order_invoice($order);
   if ($success) {
     drupal_set_message(t('The PDF invoice has been resent successfully.'), 'status');
   }
   else {
     drupal_set_message(t('The PDF could not be resent.'), 'error');
   }
-  drupal_goto('admin/commerce/orders/' . $order->order_id);
+  $form_state['redirect'] = 'admin/commerce/orders/' . $order->order_id;
 }

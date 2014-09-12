@@ -59,7 +59,7 @@ function commerce_billy_pdf_admin_form($form, &$form_state) {
   }
   $form['commerce_billy_pdf_css_files'] = array(
     '#type' => 'textarea',
-    '#title' => t('Inlince CSS files'),
+    '#title' => t('Inline CSS files'),
     '#default_value' => $default_value,
     '#required' => TRUE,
     '#description' => t('One CSS file per line.'),

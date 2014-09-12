@@ -65,7 +65,11 @@ function commerce_billy_default_rules_configuration() {
       "IF" : [
         { "NOT data_is" : { "data" : [ "commerce-order-unchanged:status" ], "value" : "canceled" } },
         { "data_is" : { "data" : [ "commerce-order:status" ], "value" : "canceled" } },
-        { "data_is" : { "data" : [ "commerce-order:type" ], "value" : "commerce_order" } }
+        { "entity_has_field" : {
+            "entity" : [ "commerce-order" ],
+            "field" : "field_commerce_billy_cancel_date"
+          }
+        }
       ],
       "DO" : [
         { "data_set" : {
@@ -82,9 +86,6 @@ function commerce_billy_default_rules_configuration() {
       "TAGS" : [ "commerce_billy" ],
       "REQUIRES" : [ "rules", "commerce_order" ],
       "USES VARIABLES" : { "order" : { "label" : "Order", "type" : "commerce_order" } },
-      "IF" : [
-        { "data_is" : { "data" : [ "order:type" ], "value" : "commerce_order" } }
-      ],
       "DO" : [
         { "commerce_order_update_state" : { "commerce_order" : [ "order" ], "order_state" : "canceled" } }
       ]
@@ -97,7 +98,7 @@ function commerce_billy_default_rules_configuration() {
       "REQUIRES" : [ "rules", "commerce_order", "commerce_billy" ],
       "USES VARIABLES" : { "order" : { "label" : "Order", "type" : "commerce_order" } },
       "IF" : [
-        { "data_is" : { "data" : [ "order:type" ], "value" : "commerce_order" } },
+        { "entity_has_field" : { "entity" : [ "order" ], "field" : "field_commerce_billy_i_date" } },
         { "data_is" : { "data" : [ "order:order-number" ], "value" : [ "order:order-id" ] } }
       ],
       "DO" : [

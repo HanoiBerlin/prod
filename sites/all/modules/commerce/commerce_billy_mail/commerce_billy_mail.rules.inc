@@ -36,5 +36,5 @@ function commerce_billy_mail_rules_action_info() {
  * The action function for 'commerce_billy_mail_action_hello_world'.
  */
 function commerce_billy_mail_action_send_invoice($order) {
-  return _commerce_billy_mail_mimemail_send_order_invoice($order);
+  return _commerce_billy_mail_send_order_invoice($order);
 }

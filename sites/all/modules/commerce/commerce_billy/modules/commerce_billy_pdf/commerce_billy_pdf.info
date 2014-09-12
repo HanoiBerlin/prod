@@ -9,9 +9,11 @@ dependencies[] = libraries
 ; Views includes
 files[] = includes/views/handlers/commerce_billy_pdf_field_handler.inc
 
-; Information added by drupal.org packaging script on 2013-07-01
-version = "7.x-1.0-beta1"
+configure = admin/commerce/config/billy-invoice/pdf
+
+; Information added by Drupal.org packaging script on 2014-03-12
+version = "7.x-1.0-beta2"
 core = "7.x"
 project = "commerce_billy"
-datestamp = "1372672259"
+datestamp = "1394635851"
 
