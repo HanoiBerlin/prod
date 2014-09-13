@@ -9,10 +9,17 @@
   .oh-current-closed {
     display: block;
     font-size: 2em;
-    color: red;
     margin: .5em;
+    color: red;
   }
   .oh-current-open {
+    display: block;
+    font-size: 2em;
+    margin: .5em;
     color: green;
+  }
+  .oh-display {
+    display: block;
+    margin-bottom: .5em;
   }
 }

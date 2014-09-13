@@ -1,7 +1,7 @@
-name = Simple
+name = Threecol
 description = A simple 3 column layout demonstrating mobile first and Susy.
 preview = preview.png
-template = simple-layout
+template = threecol-layout
 
 ; Regions
 regions[branding]       = Branding
@@ -15,4 +15,4 @@ regions[sidebar_second] = Second sidebar
 regions[footer]         = Footer
 
 ; Stylesheets
-stylesheets[all][] = ../../css/layouts/simple/simple.layout.css
+stylesheets[all][] = ../../css/layouts/threecol/threecol.layout.css
