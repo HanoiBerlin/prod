@@ -34,7 +34,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 11,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -88,7 +88,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'leaflet',
         'settings' => array(
-          'height' => 400,
+          'height' => 300,
           'icon' => array(
             'html' => '',
             'htmlClass' => '',
@@ -115,8 +115,8 @@ function resto_content_type_restaurant_field_default_field_instances() {
           ),
           'leaflet_map' => 'OSM Mapnik',
           'popup' => array(
-            'show' => 0,
-            'text' => '',
+            'show' => 1,
+            'text' => '[node:field_restaurant_address]',
           ),
           'vector_display' => array(
             'clickable' => 0,
@@ -199,7 +199,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'weight' => 6,
       ),
       'footer' => array(
-        'label' => 'inline',
+        'label' => 'hidden',
         'module' => 'office_hours',
         'settings' => array(
           'closedformat' => 'Closed',
@@ -349,10 +349,9 @@ function resto_content_type_restaurant_field_default_field_instances() {
       ),
       'footer' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -429,7 +428,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 12,
       ),
       'teaser' => array(
         'label' => 'above',

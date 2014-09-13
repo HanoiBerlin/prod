@@ -54,7 +54,7 @@ function resto_content_type_restaurant_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'left' => array(
-        0 => 'field_restaurant_contact',
+        0 => 'title',
         1 => 'field_restaurant_address',
         2 => 'field_office_hours',
       ),
@@ -63,7 +63,7 @@ function resto_content_type_restaurant_ds_layout_settings_info() {
       ),
     ),
     'fields' => array(
-      'field_restaurant_contact' => 'left',
+      'title' => 'left',
       'field_restaurant_address' => 'left',
       'field_office_hours' => 'left',
       'field_geofield' => 'right',
