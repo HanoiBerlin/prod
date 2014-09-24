@@ -236,6 +236,10 @@ function commerce_billy_mail_pdf_prepare($order) {
  */
 function commerce_billy_mail_pdf_create($html, $filename) {
   $dompdf = commerce_billy_pdf_prepare_dompdf($html, $filename);
+  if (!is_object($dompdf)) {
+    watchdog('commerce_billy_mail', 'PDF document could not be created. Check commerce_billy_pdf configuration to ensury DOMPDF is installed correctly.', WATCHDOG_ERROR);
+  }
+
   $filecontent = $dompdf->output();
 
   return $filecontent;
