@@ -1,0 +1,39 @@
+diff --git a/commerce_billy.module b/commerce_billy.module
+index 8007bda..b48fd17 100644
+--- a/commerce_billy.module
++++ b/commerce_billy.module
+@@ -12,7 +12,6 @@ define('COMMERCE_BILLY_INVOICE_METHOD_YEARLY', 'yearly');
+ // Invoice number is regenerated every month.
+ define('COMMERCE_BILLY_INVOICE_METHOD_MONTHLY', 'monthly');
+ 
+-
+ /**
+  * Implements hook_commerce_order_state_info().
+  */
+@@ -200,6 +199,7 @@ function commerce_billy_query_variable($var_name) {
+  * Implements hook_menu().
+  */
+ function commerce_billy_menu() {
++  $items = array();
+   $items['admin/commerce/config/billy-invoice'] = array(
+     'title' => 'Billy invoice settings',
+     'description' => 'Configure the Billy invoicing settings',
+@@ -214,6 +214,18 @@ function commerce_billy_menu() {
+     'type' => MENU_DEFAULT_LOCAL_TASK,
+     'weight' => -10,
+   );
++  $items['admin/commerce/orders/%commerce_order/pdf-invoice'] = array(
++    'title' => 'Invoice (PDF)',
++    'page callback' => 'commerce_billy_pdf',
++    'page arguments' => array(3),
++    'access callback' => 'commerce_billy_pdf_view_access',
++    'access arguments' => array(3),
++    'type' => MENU_LOCAL_TASK,
++    'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
++    'weight' => 10,
++    'file' => 'commerce_billy_pdf.module',
++    'file path' => drupal_get_path('module', 'commerce_billy_pdf') . '/',
++  );
+   return $items;
+ }
+ 

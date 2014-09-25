@@ -1,0 +1,58 @@
+diff -u a/commerce_billy.admin.inc b/commerce_billy.admin.inc
+--- a/commerce_billy.admin.inc  2014-03-12 16:02:54.000000000 +0200
++++ b/commerce_billy.admin.inc  2014-07-02 12:22:03.084491773 +0300
+@@ -68,7 +68,21 @@
+     '#default_value' => variable_get('commerce_billy_auto_invoice', FALSE),
+     '#description' => t('If set, the order state is set to \'invoiced\' on order completion and an invoice number is generated. Otherwise an order has to be manually moved to the state "invoiced" to generated the invoice number. Changing this value requires a cache-clear.'),
+   );
++  
++  $invoice_order_title = array(
++    COMMERCE_BILLY_INVOICE_ORDER_TITLE_REPLACE => t('Replace the order number with the pattern.'),
++    COMMERCE_BILLY_INVOICE_ORDER_TITLE_PARENTHESIS => t('Replace the order number with the pattern in a parenthesis.'),
++    COMMERCE_BILLY_INVOICE_ORDER_TITLE_NO_CHANGE => t('Don\'t change the order number.'),
++    
++  );
+ 
++  $form['commerce_billy_invoice_order_title'] = array(
++    '#type' => 'radios',
++    '#title' => t('Change the Order Title Number'),
++    '#default_value' => variable_get('commerce_billy_invoice_order_title', COMMERCE_BILLY_INVOICE_ORDER_TITLE_REPLACE),
++    '#options' => $invoice_order_title,
++  );
++  
+   $form['actions']['#type'] = 'actions';
+   $form['actions']['submit'] = array(
+     '#type' => 'submit',
+diff -u a/commerce_billy.module b/commerce_billy.module
+--- a/commerce_billy.module     2014-03-12 16:02:54.000000000 +0200
++++ b/commerce_billy.module     2014-07-02 12:22:02.496491778 +0300
+@@ -12,6 +12,10 @@
+ // Invoice number is regenerated every month.
+ define('COMMERCE_BILLY_INVOICE_METHOD_MONTHLY', 'monthly');
+ 
++define('COMMERCE_BILLY_INVOICE_ORDER_TITLE_REPLACE', 'replace');
++define('COMMERCE_BILLY_INVOICE_ORDER_TITLE_NO_CHANGE', 'no_change');
++define('COMMERCE_BILLY_INVOICE_ORDER_TITLE_PARENTHESIS', 'in_parenthesis');
++
+ 
+ /**
+  * Implements hook_commerce_order_state_info().
+@@ -94,7 +98,16 @@
+     watchdog('commerce_billy', t('Error: Order number %number for order %id already exists.', array('%number' => $invoice_nr, '%id' => $order->order_id)), WATCHDOG_ERROR);
+   }
+   else {
+-    $order->order_number = $invoice_nr;
++    $replace = variable_get('commerce_billy_invoice_order_title', COMMERCE_BILLY_INVOICE_ORDER_TITLE_REPLACE);
++    switch ($replace) {
++      case COMMERCE_BILLY_INVOICE_ORDER_TITLE_REPLACE:
++       $order->order_number = $invoice_nr;
++       break;
++
++      case COMMERCE_BILLY_INVOICE_ORDER_TITLE_PARENTHESIS:
++       $order->order_number .= " (".$invoice_nr.")";
++       break;
++    }//we don't check for "no change" value at all
+   }
+ 
+   lock_release($lock_name);
+Common subdirectories: a/modules and b/modules
