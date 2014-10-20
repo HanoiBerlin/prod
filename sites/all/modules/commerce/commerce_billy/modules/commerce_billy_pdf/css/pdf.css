@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
 }
 .header {
   width: 100%;
@@ -14,15 +14,30 @@ body {
   position: absolute;
   top: 300px;
 }
+.invoice-title {
+font-size: 30px;
+  position: absolute;
+  left: 100px;
+}
+.invoice-site {
+font-size: 15px;
+  position: absolute;
+  left: 100px;
+top:40px;
+}
+
+
 .invoice-header {
   font-size: 14px;
   color: #646464;
   text-align: right;
+padding-bottom: 10px;
+  border-bottom: 1px solid #646464;
 }
 .invoice-footer {
   border-top: 1px solid #646464;
   width: 100%;
-  font-size: 14px;
+  font-size: 13px;
   color: #646464;
   text-align: center;
   padding-top: 4px;
@@ -33,27 +48,43 @@ body {
 }
 
 .customer .field-label,
-.customer .field__label {
+.customer .field__label ,
+.customer_shipping .field-label,
+.customer_shipping .field__label,
+.order-id .field__label {
   display: none;
 }
 .customer .field-name-field-customer-lastname,
 .customer .field--name-field-customer-lastname {
   display: none;
 }
+.customer  {
+  position: absolute;
+  top: 190px;  
+
+}
+.customer_shipping {
+  position: absolute;
+  top: 175px;
+  margin-left: 370px;
+  }
+
+
+/*
 
 .invoice-number {
   position: absolute;
-  top: 350px;
+  top: 300px;
 }
 .order-id {
   position: absolute;
-  top: 370px;
+  top: 320px;
 }
 .invoice-header-date {
   margin-top: 25px;
-  margin-left: 550px;
-  text-align: right;
-}
+  /*margin-left: 550px;*/
+ /* text-align: left;
+}*/
 .line-items {
   margin-top: 200px;
 }
@@ -67,7 +98,7 @@ body {
   border-collapse: collapse;
 }
 .view-commerce-line-item-table thead {
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
 }
 .view-commerce-line-item-table th {
   text-align: right;
@@ -79,16 +110,16 @@ body {
 .view-commerce-line-item-table .views-field-commerce-total {
   text-align: right;
   padding-right: 5px;
-  width: 200px;
+  width: 150px;
 }
 .view-commerce-line-item-table .views-field-line-item-title {
   text-align: left;
-  width: 300px;
+  width: 380px;
 }
 
 .order-total table {
   width: 100%;
-  border-top: 2px solid black;
+  border-top: 1px solid black;
   font-weight: bold;
 }
 td.component-title {
@@ -96,7 +127,7 @@ td.component-title {
 }
 td.component-total {
   text-align: right;
-  width: 200px;
+  width: 90px;
 }
 
 .contextual-links-wrapper {

@@ -9,9 +9,9 @@ dependencies[] = mimemail
 dependencies[] = commerce_billy
 dependencies[] = commerce_billy_pdf
 dependencies[] = token
-; Information added by Drupal.org packaging script on 2014-09-10
-version = "7.x-1.0-alpha2+0-dev"
+; Information added by Drupal.org packaging script on 2014-09-16
+version = "7.x-1.0-beta3"
 core = "7.x"
 project = "commerce_billy_mail"
-datestamp = "1410381829"
+datestamp = "1410864836"
 

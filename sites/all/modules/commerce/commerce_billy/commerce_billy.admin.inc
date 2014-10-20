@@ -68,7 +68,21 @@ function commerce_billy_admin_form($form, &$form_state) {
     '#default_value' => variable_get('commerce_billy_auto_invoice', FALSE),
     '#description' => t('If set, the order state is set to \'invoiced\' on order completion and an invoice number is generated. Otherwise an order has to be manually moved to the state "invoiced" to generated the invoice number. Changing this value requires a cache-clear.'),
   );
+  
+  $invoice_order_title = array(
+    COMMERCE_BILLY_INVOICE_ORDER_TITLE_REPLACE => t('Replace the order number with the pattern.'),
+    COMMERCE_BILLY_INVOICE_ORDER_TITLE_PARENTHESIS => t('Replace the order number with the pattern in a parenthesis.'),
+    COMMERCE_BILLY_INVOICE_ORDER_TITLE_NO_CHANGE => t('Don\'t change the order number.'),
+    
+  );
 
+  $form['commerce_billy_invoice_order_title'] = array(
+    '#type' => 'radios',
+    '#title' => t('Change the Order Title Number'),
+    '#default_value' => variable_get('commerce_billy_invoice_order_title', COMMERCE_BILLY_INVOICE_ORDER_TITLE_REPLACE),
+    '#options' => $invoice_order_title,
+  );
+  
   $form['actions']['#type'] = 'actions';
   $form['actions']['submit'] = array(
     '#type' => 'submit',
@@ -81,6 +95,10 @@ function commerce_billy_admin_form($form, &$form_state) {
  * Validation handler for Commerce Billy admin form.
  */
 function commerce_billy_admin_form_validate($form, &$form_state) {
+  // If we on confirm form just skip validation.
+  if (!empty($form_state['values']['nr_override'])) {
+    return;
+  }
   $pattern = $form_state['values']['commerce_billy_invoice_nr_pattern'];
   if (strpos($pattern, '{id}') === FALSE) {
     form_set_error('commerce_billy_invoice_nr_pattern', t('Invalid pattern. {id} is missing.'));

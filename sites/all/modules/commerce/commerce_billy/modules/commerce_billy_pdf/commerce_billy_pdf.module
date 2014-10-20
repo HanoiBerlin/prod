@@ -112,8 +112,8 @@ function commerce_billy_pdf_preprocess_entity(&$variables) {
  */
 function commerce_billy_pdf($order) {
   $html = commerce_billy_pdf_html($order);
-  $filename = preg_replace('/[^a-z0-9]/', '_', drupal_strtolower('invoice_' . $order->order_number)) . '.pdf';
-
+//  $filename = preg_replace('/[^a-z0-9]/', '_', drupal_strtolower('invoice_' . $order->order_number)) . '.pdf';
+  $filename = t('invoice_') . $order->order_number . '.pdf';
   try {
     commerce_billy_pdf_output($html, $filename);
     // print $html;
@@ -233,6 +233,13 @@ function commerce_billy_pdf_prepare_dompdf($html, $filename) {
     $dompdf->set_paper('a4', 'portrait');
 
     $html = htmlspecialchars_decode(htmlentities($html, ENT_NOQUOTES, 'UTF-8'), ENT_NOQUOTES);
+// NEW
+    if(variable_get('commerce_billy_pdf_debug_pdf_output', false)){
+      // Print out the text for debug reasons instead of pdf output.
+      echo $html;
+      drupal_exit();
+    }
+// END NEW
     $dompdf->load_html($html);
     $dompdf->render();
     return $dompdf;

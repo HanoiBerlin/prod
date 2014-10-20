@@ -11,8 +11,9 @@ define('COMMERCE_BILLY_INVOICE_METHOD_INFINITE', 'infinite');
 define('COMMERCE_BILLY_INVOICE_METHOD_YEARLY', 'yearly');
 // Invoice number is regenerated every month.
 define('COMMERCE_BILLY_INVOICE_METHOD_MONTHLY', 'monthly');
-
-
+define('COMMERCE_BILLY_INVOICE_ORDER_TITLE_REPLACE', 'replace');
+define('COMMERCE_BILLY_INVOICE_ORDER_TITLE_NO_CHANGE', 'no_change');
+define('COMMERCE_BILLY_INVOICE_ORDER_TITLE_PARENTHESIS', 'in_parenthesis');
 /**
  * Implements hook_commerce_order_state_info().
  */
@@ -94,7 +95,16 @@ function commerce_billy_invoice_nr($order) {
     watchdog('commerce_billy', t('Error: Order number %number for order %id already exists.', array('%number' => $invoice_nr, '%id' => $order->order_id)), WATCHDOG_ERROR);
   }
   else {
-    $order->order_number = $invoice_nr;
+    $replace = variable_get('commerce_billy_invoice_order_title', COMMERCE_BILLY_INVOICE_ORDER_TITLE_REPLACE);
+    switch ($replace) {
+      case COMMERCE_BILLY_INVOICE_ORDER_TITLE_REPLACE:
+       $order->order_number = $invoice_nr;
+       break;
+
+      case COMMERCE_BILLY_INVOICE_ORDER_TITLE_PARENTHESIS:
+       $order->order_number .= " (".$invoice_nr.")";
+       break;
+    }//we don't check for "no change" value at all
   }
 
   lock_release($lock_name);
@@ -200,6 +210,7 @@ function commerce_billy_query_variable($var_name) {
  * Implements hook_menu().
  */
 function commerce_billy_menu() {
+  $items = array();
   $items['admin/commerce/config/billy-invoice'] = array(
     'title' => 'Billy invoice settings',
     'description' => 'Configure the Billy invoicing settings',
@@ -213,6 +224,18 @@ function commerce_billy_menu() {
     'title' => 'Settings',
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'weight' => -10,
+  );
+  $items['admin/commerce/orders/%commerce_order/pdf-invoice'] = array(
+    'title' => 'Invoice (PDF)',
+    'page callback' => 'commerce_billy_pdf',
+    'page arguments' => array(3),
+    'access callback' => 'commerce_billy_pdf_view_access',
+    'access arguments' => array(3),
+    'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
+    'weight' => 10,
+    'file' => 'commerce_billy_pdf.module',
+    'file path' => drupal_get_path('module', 'commerce_billy_pdf') . '/',
   );
   return $items;
 }
