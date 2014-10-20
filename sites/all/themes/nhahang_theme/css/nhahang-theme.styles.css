@@ -60,6 +60,28 @@ img, media {
   width: 100%;
   z-index: -1; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_menuview\.scss}line{font-family:\000032}}
+.menuview .views-row-even, .menuview .views-row-odd {
+  margin-bottom: 1em;
+  min-height: 50px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_menuview\.scss}line{font-family:\000036}}
+.menuview .views-row-odd {
+  float: left;
+  clear: left;
+  margin-right: 5%;
+  width: 45%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_menuview\.scss}line{font-family:\0000312}}
+.menuview .views-row-even {
+  float: right;
+  width: 45%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_menuview\.scss}line{font-family:\0000316}}
+.menuview .views-field.views-field-commerce-price {
+  float: right;
+  font-size: 2em; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_menuview\.scss}line{font-family:\0000320}}
+.menuview .views-field.views-field-add-to-cart-form {
+  float: right; }
+
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_navigation\.scss}line{font-family:\000032}}
 .block--system-main-menu .menu {
   margin: 0;

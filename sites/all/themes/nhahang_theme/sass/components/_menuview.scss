@@ -1,0 +1,23 @@
+.menuview {
+  .views-row-even, .views-row-odd {
+    margin-bottom: 1em;
+    min-height: 50px;
+  }
+  .views-row-odd {
+    float: left;
+    clear: left;
+    margin-right: 5%;
+    width: 45%;
+  }
+  .views-row-even {
+    float: right;
+    width: 45%;
+  }
+  .views-field.views-field-commerce-price {
+    float: right;
+    font-size: 2em;
+  }
+  .views-field.views-field-add-to-cart-form {
+    float: right;
+  }
+}
