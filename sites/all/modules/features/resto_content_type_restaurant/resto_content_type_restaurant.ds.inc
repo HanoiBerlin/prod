@@ -20,16 +20,14 @@ function resto_content_type_restaurant_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'body',
-        1 => 'title',
-        2 => 'field_restaurant_address',
-        3 => 'field_restaurant_images',
+        0 => 'title',
+        1 => 'body',
+        2 => 'field_restaurant_images',
       ),
     ),
     'fields' => array(
-      'body' => 'ds_content',
       'title' => 'ds_content',
-      'field_restaurant_address' => 'ds_content',
+      'body' => 'ds_content',
       'field_restaurant_images' => 'ds_content',
     ),
     'classes' => array(),

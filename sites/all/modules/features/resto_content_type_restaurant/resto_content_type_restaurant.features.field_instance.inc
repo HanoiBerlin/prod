@@ -28,7 +28,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'footer' => array(
         'label' => 'hidden',
@@ -62,7 +62,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -175,7 +175,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         ),
       ),
       'type' => 'geocoder',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -243,7 +243,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
       'module' => 'office_hours',
       'settings' => array(),
       'type' => 'office_hours',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -271,15 +271,9 @@ function resto_content_type_restaurant_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'hidden',
-        'module' => 'addressfield',
-        'settings' => array(
-          'format_handlers' => array(
-            0 => 'address',
-          ),
-          'use_widget_handlers' => 1,
-        ),
-        'type' => 'addressfield_default',
-        'weight' => 2,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
       'footer' => array(
         'label' => 'hidden',
@@ -323,7 +317,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         ),
       ),
       'type' => 'addressfield_standard',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -344,7 +338,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 10,
       ),
       'footer' => array(
         'label' => 'hidden',
@@ -397,7 +391,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -421,7 +415,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'footer' => array(
         'label' => 'hidden',
@@ -474,7 +468,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'media_generic',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 

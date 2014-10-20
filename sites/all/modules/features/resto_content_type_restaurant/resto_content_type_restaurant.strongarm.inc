@@ -47,10 +47,13 @@ function resto_content_type_restaurant_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '3',
+          'weight' => '4',
         ),
         'redirect' => array(
-          'weight' => '2',
+          'weight' => '3',
+        ),
+        'headerimage' => array(
+          'weight' => '1',
         ),
       ),
       'display' => array(),
