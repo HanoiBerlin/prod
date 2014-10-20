@@ -12,6 +12,7 @@ stylesheets[all][] = css/nhahang-theme.normalize.css
 stylesheets[all][] = css/nhahang-theme.hacks.css
 stylesheets[all][] = css/nhahang-theme.styles.css
 stylesheets[all][] = css/nhahang-theme.no-query.css
+stylesheets[all][] = css/layouts/simple/simple.layout.css
 
 ; ========================================
 ; Scripts
