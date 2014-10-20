@@ -48,6 +48,14 @@ img, media {
   float: left;
   margin: 1em 1em 1em 0; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_header\.scss}line{font-family:\000039}}
+.headerimage {
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1; }
+
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_navigation\.scss}line{font-family:\000032}}
 .block--system-main-menu .menu {
   margin: 0;
