@@ -38,12 +38,16 @@ img, media {
   display: block;
   margin-bottom: .5em; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_header\.scss}line{font-family:\000032}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_header\.scss}line{font-family:\000031}}
+.l-page {
+  background: url(../images/header_background.JPG) no-repeat; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_header\.scss}line{font-family:\000034}}
 .site-logo {
   float: left;
   margin: 1em 1em 1em 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_header\.scss}line{font-family:\000036}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_header\.scss}line{font-family:\000038}}
 .site-name {
   float: left;
   margin: 1em 1em 1em 0; }
