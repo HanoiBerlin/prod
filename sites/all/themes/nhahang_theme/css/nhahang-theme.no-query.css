@@ -49,6 +49,10 @@ img, media {
   margin: 1em 1em 1em 0; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_header\.scss}line{font-family:\000039}}
+.l-header {
+  height: 270px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/prod\/sites\/all\/themes\/nhahang_theme\/sass\/components\/_header\.scss}line{font-family:\0000312}}
 .headerimage {
   left: 0;
   position: absolute;

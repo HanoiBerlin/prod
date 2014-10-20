@@ -23,11 +23,11 @@ function header_image_feature_field_default_field_instances() {
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'header_image',
         ),
         'type' => 'image',
         'weight' => 0,
