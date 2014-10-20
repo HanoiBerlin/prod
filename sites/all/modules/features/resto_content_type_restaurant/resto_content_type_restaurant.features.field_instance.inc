@@ -82,7 +82,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 11,
       ),
       'footer' => array(
         'label' => 'hidden',
@@ -196,7 +196,7 @@ function resto_content_type_restaurant_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 12,
       ),
       'footer' => array(
         'label' => 'hidden',
@@ -342,10 +342,9 @@ function resto_content_type_restaurant_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'footer' => array(
         'label' => 'hidden',

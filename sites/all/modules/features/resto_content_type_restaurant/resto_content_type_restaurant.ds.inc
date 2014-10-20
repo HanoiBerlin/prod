@@ -21,14 +21,14 @@ function resto_content_type_restaurant_ds_layout_settings_info() {
     'regions' => array(
       'ds_content' => array(
         0 => 'body',
-        1 => 'field_restaurant_contact',
+        1 => 'title',
         2 => 'field_restaurant_address',
         3 => 'field_restaurant_images',
       ),
     ),
     'fields' => array(
       'body' => 'ds_content',
-      'field_restaurant_contact' => 'ds_content',
+      'title' => 'ds_content',
       'field_restaurant_address' => 'ds_content',
       'field_restaurant_images' => 'ds_content',
     ),
