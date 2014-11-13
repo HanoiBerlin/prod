@@ -2,19 +2,19 @@
 
 /**
  * @file
- * Provides API support for working with physical product types in Drupal Commerce.
+ * API for working with physical product types in Drupal Commerce.
  */
 
 
 /**
  * Determines the weight field to use for a given entity.
  *
- * @param $entity_type
+ * @param string $entity_type
  *   The type of entity passed to the function.
- * @param $entity
+ * @param object $entity
  *   The actual entity whose weight field name should be determined.
  *
- * @return
+ * @return string
  *   The name of the field to use on the entity to find a weight value or NULL
  *   if none was found.
  */
@@ -31,12 +31,12 @@ function commerce_physical_entity_weight_field_name($entity_type, $entity) {
 /**
  * Determines the dimensions field to use for a given entity.
  *
- * @param $entity_type
+ * @param string $entity_type
  *   The type of entity passed to the function.
- * @param $entity
+ * @param object $entity
  *   The actual entity whose weight field name should be determined.
  *
- * @return
+ * @return string
  *   The name of the field to use on the entity to find a weight value or NULL
  *   if none was found.
  */
@@ -53,13 +53,14 @@ function commerce_physical_entity_dimensions_field_name($entity_type, $entity) {
 /**
  * Determines the field of a certain type to use for a given entity.
  *
- * @param $entity_type
+ * @param string $entity_type
  *   The type of entity passed to the function.
- * @param $entity
+ * @param object $entity
  *   The actual entity whose weight field name should be determined.
- * @param $field_type
+ * @param string $field_type
+ *   The field type to use.
  *
- * @return
+ * @return string
  *   The name of the field to use on the entity to find a weight value or NULL
  *   if none was found.
  */
@@ -86,10 +87,10 @@ function commerce_physical_entity_field_name($entity_type, $entity, $field_type)
 /**
  * Determines the weight to use for a product line item on an order.
  *
- * @param $line_item
+ * @param commerce_line_item $line_item
  *   A product line item whose weight should be determined.
  *
- * @return
+ * @return array
  *   A weight field value array representing the weight of the product line item
  *   or NULL if none was found.
  */
@@ -125,10 +126,10 @@ function commerce_physical_product_line_item_weight($line_item) {
 /**
  * Determines the dimensions of a product line item on an order.
  *
- * @param $line_item
+ * @param commerce_line_item $line_item
  *   A product line item whose dimensions should be determined.
  *
- * @return
+ * @return array
  *   An array of dimensions field value arrays. There'll be one entry in the
  *   array per product, with the entry being an array of that product's
  *   dimensions. If this line item contains no products with dimensions, an
@@ -150,8 +151,8 @@ function commerce_physical_product_line_item_dimensions($line_item) {
         $product_wrapper = entity_metadata_wrapper('commerce_product', $product);
 
         // Add dimension values per product in the line item.
-        for ($i=0; $i < $line_item->quantity; $i++) {
-          $dimensions[] = $product_wrapper->{$field_name}->value();
+        for ($i = 0; $i < $line_item->quantity; $i++) {
+          $dimensions = $product_wrapper->{$field_name}->value();
         }
       }
     }
@@ -167,12 +168,12 @@ function commerce_physical_product_line_item_dimensions($line_item) {
 /**
  * Determines the weight of an entire order.
  *
- * @param $order
+ * @param commerce_order $order
  *   The order object whose weight value should be calculated.
- * @param $unit
+ * @param string $unit
  *   The unit of measurement to use for the returned weight of the order.
  *
- * @return
+ * @return array
  *   A weight field value array representing the total weight of the order using
  *   the specified unit of measurement or NULL if no weight could be determined.
  */
@@ -206,18 +207,69 @@ function commerce_physical_order_weight($order, $unit = 'lb') {
   return $weight;
 }
 
+
+/**
+ * Determines the volume of an entire order.
+ *
+ * @param commerce_order $order
+ *   The order object whose volume should be calculated.
+ * @param string $unit
+ *   The unit of measurement to convert dimensions to before calculating the
+ *   volume of the order in the related cubic unit.
+ *
+ * @return array
+ *   A volume value array with keys representing the total 'volume' of the order
+ *   in the 'unit' specified or NULL if no volume could be determined.
+ */
+function commerce_physical_order_volume($order, $unit = 'in') {
+  $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+  $volume = NULL;
+
+  // Loop over each line item on the order.
+  foreach ($order_wrapper->commerce_line_items as $delta => $line_item_wrapper) {
+    // Get the dimensions value of product line items.
+    if (in_array($line_item_wrapper->type->value(), commerce_product_line_item_types())) {
+      $line_item_dimensions = commerce_physical_product_line_item_dimensions($line_item_wrapper->value());
+
+      // Add it to the running total converting it to the required weight unit.
+      if (!physical_field_is_empty($line_item_dimensions, array('type' => 'physical_dimensions'))) {
+        $converted_dimensions = physical_dimensions_convert($line_item_dimensions, $unit);
+        $converted_dimensions['volume'] = $converted_dimensions['width'] * $converted_dimensions['length'] * $converted_dimensions['height'] * $line_item_wrapper->quantity->value();
+
+        if (empty($volume['volume'])) {
+          // Create a volume value array using the converted unit type.
+          $volume = array(
+            'volume' => $converted_dimensions['volume'],
+            'unit' => $unit,
+          );
+        }
+        else {
+          $volume['volume'] += $converted_dimensions['volume'];
+        }
+      }
+    }
+  }
+
+  // Allow other modules to alter the volume if necessary.
+  drupal_alter('commerce_physical_order_volume', $volume, $order, $unit);
+
+  return $volume;
+}
+
+
 /**
  * Determines the dimensions of each product in an entire order.
+ *
  * Other code can then use this data to figure out things like what the maximum
  * dimensions of any product in the order is, or what size shipping container
  * everything will fit into.
  *
- * @param $order
+ * @param commerce_order $order
  *   The order object whose dimensions should be returned.
- * @param $unit
+ * @param string $unit
  *   The unit of measurement to use for the returned dimensions.
  *
- * @return
+ * @return array
  *   An array of dimension arrays. One per product in the order.
  *   weight field value array representing the total weight of the order using
  *   the specified unit of measurement or NULL if no weight could be determined.
@@ -237,7 +289,7 @@ function commerce_physical_order_dimensions($order, $unit = 'cm') {
     }
   }
 
-  // Now ensure that all dimensions supplied are in the requested units
+  // Now ensure that all dimensions supplied are in the requested units.
   foreach ($order_dimensions as $key => $dimensions) {
     $order_dimensions[$key] = physical_dimensions_convert($dimensions, $unit);
   }
@@ -251,10 +303,10 @@ function commerce_physical_order_dimensions($order, $unit = 'cm') {
 /**
  * Determines whether or not a line item should be considered shippable.
  *
- * @param $line_item
+ * @param commerce_line_item $line_item
  *   The line item object whose shippability is being determined.
  *
- * @return
+ * @return bool
  *   Boolean indicating whether or not the given line item represents something
  *   shippable; defaults to FALSE unless the line item represents a product line
  *   item with a discernible weight.
@@ -281,10 +333,10 @@ function commerce_physical_line_item_shippable($line_item) {
 /**
  * Determines whether or not an order should be considered shippable.
  *
- * @param $order
+ * @param commerce_order $order
  *   The order object whose shippability should be determined.
  *
- * @return
+ * @return bool
  *   Boolean indicating whether or not the given order is shippable; defaults to
  *   FALSE unless any line item on the order is determined to be shippable.
  */
@@ -308,14 +360,13 @@ function commerce_physical_order_shippable($order) {
 }
 
 /**
- * Determines the name of the shipping customer profile reference field for the
- * given order.
+ * Name of the shipping customer profile reference field for the given order.
  *
- * @param $order
+ * @param commerce_order $order
  *   The order whose shipping customer profile reference field name should be
  *   determined.
  *
- * @return
+ * @return string
  *   The name of the field to use on the order to find shipping information or
  *   NULL if none was found; defaults to commerce_customer_shipping if available
  *   or another customer profile reference if not (preferring profiles other
@@ -354,10 +405,10 @@ function commerce_physical_order_shipping_field_name($order) {
 /**
  * Determines the name of the phone number field of a customer profile.
  *
- * @param $profile
+ * @param commerce_cutomer_profile $profile
  *   The customer profile whose phone number field name should be determined.
  *
- * @return
+ * @return string
  *   The name of the field to use on the customer profile to find a phone number
  *   or NULL if none was found. Defaults to field_phone or field_phone_number if
  *   available; otherwise it's up to you to alter it in a custom module since we
@@ -381,13 +432,12 @@ function commerce_physical_customer_profile_phone_number_field_name($profile) {
 }
 
 /**
- * Determines whether or not a shipping customer profile should be considered as
- * a residential address.
+ * Whether or not a shipping customer profile is a residential address.
  *
- * @param $profile
+ * @param commerce_customer_profile $profile
  *   The customer profile whose residential status should be determined.
  *
- * @return
+ * @return bool
  *   Boolean indicating whether or not the given profile has a residential
  *   address; defaults to TRUE unless otherwise determined by a custom module.
  */

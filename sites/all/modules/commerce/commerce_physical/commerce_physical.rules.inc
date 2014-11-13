@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Rules integration for commerce physical.
+ */
 
 /**
  * Implements hook_rules_condition_info().
@@ -7,50 +11,86 @@ function commerce_physical_rules_condition_info() {
 
   $conditions = array();
 
-  $conditions['commerce_physical_rules_order_is_under_weight_limit'] = array(
-    'label' => t("Order's total weight is under a chosen limit"),
+  $conditions['commerce_physical_rules_order_weight_comparison'] = array(
+    'label' => t("Order total weight comparison"),
     'parameter' => array(
-      'order' => array(
+      'commerce_order' => array(
         'type' => 'commerce_order',
         'label' => t('Order'),
       ),
-      'limit' => array(
+      'operator' => array(
+        'type' => 'text',
+        'label' => t('Operator'),
+        'description' => t('The comparison operator.'),
+        'options list' => 'commerce_numeric_comparison_operator_options_list',
+        'restriction' => 'input',
+      ),
+      'value' => array(
         'type' => 'decimal',
-        'label' => t('Weight limit (kg)'),
+        'label' => t('Value'),
+      ),
+      'unit' => array(
+        'type' => 'text',
+        'label' => t('Weight unit'),
+        'options list' => 'physical_weight_unit_options',
+        'restriction' => 'input',
+        'default value' => 'kg',
       ),
     ),
     'group' => t('Commerce Physical'),
-    'callbacks' => array(
-      'execute' => 'commerce_physical_rules_order_is_under_weight_limit',
-    ),
   );
 
-  $conditions['commerce_physical_rules_order_maximum_dimension_is_under_size'] = array(
-    'label' => t("The maximum dimension of any product in the order is under a certain size"),
+  $conditions['commerce_physical_rules_order_max_dimension_comparison'] = array(
+    'label' => t("Maximum product dimension comparison"),
     'parameter' => array(
-      'order' => array(
+      'commerce_order' => array(
         'type' => 'commerce_order',
         'label' => t('Order'),
       ),
-      'limit' => array(
+      'operator' => array(
+        'type' => 'text',
+        'label' => t('Operator'),
+        'description' => t('The comparison operator.'),
+        'options list' => 'commerce_numeric_comparison_operator_options_list',
+        'restriction' => 'input',
+      ),
+      'value' => array(
         'type' => 'decimal',
-        'label' => t('Size limit (cm)'),
+        'label' => t('Value'),
+      ),
+      'unit' => array(
+        'type' => 'text',
+        'label' => t('Dimension unit'),
+        'options list' => 'physical_dimension_unit_options',
+        'restriction' => 'input',
+        'default value' => 'cm',
       ),
     ),
     'group' => t('Commerce Physical'),
-    'callbacks' => array(
-      'execute' => 'commerce_physical_rules_order_maximum_dimension_is_under_size',
+  );
+
+  $conditions['commerce_physical_rules_order_is_shippable'] = array(
+    'label' => t("The order contains shippable products"),
+    'parameter' => array(
+      'commerce_order' => array(
+        'type' => 'commerce_order',
+        'label' => t('Order'),
+      ),
     ),
+    'group' => t('Commerce Physical'),
   );
 
   return $conditions;
 }
 
+
 /**
- * Rules condition: checks to see if the maximum dimension of any product in the
- * order is under a certain size
+ * Fetches the max. dimension in the order and compares it with a given value.
+ *
+ * Calculates the maximum single dimension of any product in the order and
+ * performs a comparison on it.
  */
-function commerce_physical_rules_order_maximum_dimension_is_under_size($order, $limit) {
+function commerce_physical_rules_order_max_dimension_comparison($order, $operator, $value, $unit) {
 
   $max_dimension = 0;
 
@@ -60,10 +100,10 @@ function commerce_physical_rules_order_maximum_dimension_is_under_size($order, $
     'height',
   );
 
-  // Get the dimensions of every product in the order
-  foreach (commerce_physical_order_dimensions($order, 'cm') as $dimension) {
+  // Get the dimensions of every product in the order.
+  foreach (commerce_physical_order_dimensions($order, $unit) as $dimension) {
 
-    // Check each of length / width / height
+    // Check each of length / width / height.
     foreach ($dimension_keys as $dimension_key) {
 
       // If this dimension's bigger than the current max, it's the new max.
@@ -73,28 +113,56 @@ function commerce_physical_rules_order_maximum_dimension_is_under_size($order, $
     }
   }
 
-  if ($max_dimension > $limit) {
-    // Total size is over the limit. This condition fails:
-    return FALSE;
+  switch ($operator) {
+    case '<':
+      return $max_dimension < $value;
+
+    case '<=':
+      return $max_dimension <= $value;
+
+    case '==':
+      return $max_dimension == $value;
+
+    case '>=':
+      return $max_dimension >= $value;
+
+    case '>':
+      return $max_dimension > $value;
   }
 
-  // Otherwise, this condition passes:
-  return TRUE;
+  return FALSE;
 }
 
 /**
- * Rules condition: checks to see if the given order's total weight is under a
- * certain limit.
+ * Calculates the order's total weight and performs a comparison on it.
  */
-function commerce_physical_rules_order_is_under_weight_limit($order, $limit) {
+function commerce_physical_rules_order_weight_comparison($order, $operator, $value, $unit) {
 
-  $order_weight = commerce_physical_order_weight($order, 'kg');
+  $order_weight = commerce_physical_order_weight($order, $unit);
 
-  if ($order_weight['weight'] > $limit) {
-    // Total weight is over the limit. This condition fails:
-    return FALSE;
+  switch ($operator) {
+    case '<':
+      return $order_weight['weight'] < $value;
+
+    case '<=':
+      return $order_weight['weight'] <= $value;
+
+    case '==':
+      return $order_weight['weight'] == $value;
+
+    case '>=':
+      return $order_weight['weight'] >= $value;
+
+    case '>':
+      return $order_weight['weight'] > $value;
   }
 
-  // Otherwise, this condition passes:
-  return TRUE;
+  return FALSE;
+}
+
+/**
+ * Rules condition: check if the order contains shippable products.
+ */
+function commerce_physical_rules_order_is_shippable($order) {
+  return commerce_physical_order_shippable($order);
 }

@@ -5,9 +5,9 @@ dependencies[] = filter
 core = 7.x
 configure = admin/config/content/formats
 
-; Information added by Drupal.org packaging script on 2014-05-27
-version = "7.x-1.1"
+; Information added by Drupal.org packaging script on 2014-10-29
+version = "7.x-1.2"
 core = "7.x"
 project = "float_filter"
-datestamp = "1401185633"
+datestamp = "1414580981"
 
