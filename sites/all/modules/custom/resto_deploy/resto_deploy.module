@@ -1,10 +1,1 @@
 <php
-
-/**
- * #12347: New theme for the site
- */
-function resto_deploy_update_7003() {
-  theme_enable(array('nhahang_theme'));
-  variable_set('theme_default', 'nhahang_theme');
-}
-
