@@ -1,0 +1,9 @@
+name = Resto Deploy Module
+description = Provides all site configuration that is not in features.
+core = 7.x
+package = Administration
+dependencies[] = base_imprint
+dependencies[] = food_categories_and_CTT
+dependencies[] = header_image_feature
+dependencies[] = resto_content_type_restaurant
+dependencies[] = shipping
